@@ -1,0 +1,75 @@
+FullyShardedDataParallel(
+  (_fsdp_wrapped_module): LlavaNextForConditionalGeneration(
+    (vision_tower): CLIPVisionModel(
+      (vision_model): CLIPVisionTransformer(
+        (embeddings): CLIPVisionEmbeddings(
+          (patch_embedding): Conv2d(3, 1024, kernel_size=(14, 14), stride=(14, 14), bias=False)
+          (position_embedding): Embedding(577, 1024)
+        )
+        (pre_layrnorm): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+        (encoder): CLIPEncoder(
+          (layers): ModuleList(
+            (0-23): 24 x FullyShardedDataParallel(
+              (_fsdp_wrapped_module): CheckpointWrapper(
+                (_checkpoint_wrapped_module): CLIPEncoderLayer(
+                  (self_attn): CLIPAttention(
+                    (k_proj): Linear(in_features=1024, out_features=1024, bias=True)
+                    (v_proj): Linear(in_features=1024, out_features=1024, bias=True)
+                    (q_proj): Linear(in_features=1024, out_features=1024, bias=True)
+                    (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+                  )
+                  (layer_norm1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+                  (mlp): CLIPMLP(
+                    (activation_fn): QuickGELUActivation()
+                    (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+                    (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+                  )
+                  (layer_norm2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+                )
+              )
+            )
+          )
+        )
+        (post_layernorm): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+      )
+    )
+    (multi_modal_projector): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): LlavaNextMultiModalProjector(
+        (linear_1): Linear(in_features=1024, out_features=7168, bias=True)
+        (act): GELUActivation()
+        (linear_2): Linear(in_features=7168, out_features=7168, bias=True)
+      )
+    )
+    (language_model): LlamaForCausalLM(
+      (model): LlamaModel(
+        (embed_tokens): Embedding(64064, 7168, padding_idx=0)
+        (layers): ModuleList(
+          (0-59): 60 x FullyShardedDataParallel(
+            (_fsdp_wrapped_module): CheckpointWrapper(
+              (_checkpoint_wrapped_module): LlamaDecoderLayer(
+                (self_attn): LlamaAttention(
+                  (q_proj): Linear(in_features=7168, out_features=7168, bias=False)
+                  (k_proj): Linear(in_features=7168, out_features=1024, bias=False)
+                  (v_proj): Linear(in_features=7168, out_features=1024, bias=False)
+                  (o_proj): Linear(in_features=7168, out_features=7168, bias=False)
+                  (rotary_emb): LlamaRotaryEmbedding()
+                )
+                (mlp): LlamaMLP(
+                  (gate_proj): Linear(in_features=7168, out_features=20480, bias=False)
+                  (up_proj): Linear(in_features=7168, out_features=20480, bias=False)
+                  (down_proj): Linear(in_features=20480, out_features=7168, bias=False)
+                  (act_fn): SiLU()
+                )
+                (input_layernorm): LlamaRMSNorm((7168,), eps=1e-05)
+                (post_attention_layernorm): LlamaRMSNorm((7168,), eps=1e-05)
+              )
+            )
+          )
+        )
+        (norm): LlamaRMSNorm((7168,), eps=1e-05)
+        (rotary_emb): LlamaRotaryEmbedding()
+      )
+      (lm_head): Linear(in_features=7168, out_features=64064, bias=False)
+    )
+  )
+)
