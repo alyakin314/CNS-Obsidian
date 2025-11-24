@@ -210,7 +210,7 @@ This repository and its associated models can be subject to multiple licenses. T
 ## Contact
 
 **Corresponding Author:** Anton Alyakin ([@alyakin314](https://github.com/alyakin314))  
-Email: alyakin314@gmail.com  
+Email: alyakin314 [at] gmail.com  
 
 
 ## Citation
