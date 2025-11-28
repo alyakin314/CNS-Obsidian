@@ -4,6 +4,8 @@
 
 [![arXiv](https://img.shields.io/badge/arXiv-2502.19546-b31b1b.svg)](https://arxiv.org/abs/2502.19546)
 [![HuggingFace](https://img.shields.io/badge/🤗-LLaVA--Next--Med--OLAB-yellow)](https://huggingface.co/NYU-OLAB/LLaVA-Next-Med-OLAB)
+![Python](https://img.shields.io/badge/python-3.12-blue)
+![CUDA](https://img.shields.io/badge/CUDA-12.1-0096D6.svg)
 
 This repository contains the data processing and training code for CNS-Obsidian, a 34-billion parameter vision-language model specialized for neurosurgery. We demonstrate how domain-specific AI models can be built using curated, peer-reviewed scientific literature, establishing a transparent and reproducible framework for medical AI development.
 
